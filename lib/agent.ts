@@ -40,9 +40,14 @@ async function llmCall(state: LGState): Promise<LGState> {
     const prevMessages = state.messages as BaseMessage[];
     const prevConv = state.memory ?? [];
 
-
     const response = await modelWithTools.invoke([
-        new SystemMessage("You are a helpful assistant that performs arithmetic."),
+        new SystemMessage(
+            "You are a helpful assistant that can:\n" +
+            "- Perform arithmetic operations (add, multiply, divide)\n" +
+            "- Get real-time weather information for any city\n" +
+            "- Summarize uploaded file contents\n\n" +
+            "When asked to summarize a file, use the summarize_file tool and provide a clear, concise summary."
+        ),
         ...prevConv,
         ...prevMessages,
     ]);
