@@ -19,6 +19,18 @@ const add = tool(
     }
 );
 
+const subtract = tool(
+    ({ a, b }) => a - b,
+    {
+        name: "subtract",
+        description: "subtract numbers",
+        schema: z.object({
+            a: z.number(),
+            b: z.number(),
+        }),
+    }
+);
+
 const multiply = tool(
     ({ a, b }) => a * b,
     {
@@ -101,6 +113,7 @@ export const summarize_file = tool(
 
 export const toolsByName: Record<string, StructuredToolInterface> = {
     add,
+    subtract,
     multiply,
     divide,
     get_weather,
